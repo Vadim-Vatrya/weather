@@ -8,6 +8,9 @@ const App = () => {
   const [long, setLong] = useState([]);
   const [data, setData] = useState([]);
 
+  const API_URL = 'https://api.openweathermap.org/data/2.5';
+  const API_KEY = 'eb63035653337f135a8d54653000316a';
+
   useEffect(() => {
     const fetchData = async () => {
       navigator.geolocation.getCurrentPosition(function (position) {
@@ -15,8 +18,10 @@ const App = () => {
         setLong(position.coords.longitude);
       });
 
+      console.log(lat, long);
+
       await fetch(
-        `'https://api.openweathermap.org/data/2.5/weather/?lat=${lat}&lon=${long}&units=metric&APPID=eb63035653337f135a8d54653000316a'`,
+        `${API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${API_KEY}`,
       )
         .then(res => res.json())
         .then(result => {
@@ -24,18 +29,18 @@ const App = () => {
           console.log(result);
         });
     };
-
-    console.log('Latitude is:', lat);
-    console.log('Longitude is:', long);
     fetchData();
   }, [lat, long]);
+
+  // console.log(lat, long, data);
+
   return (
     <div className="App">
-      {/* {typeof data.main != 'undefined' ? (
+      {typeof data.main != 'undefined' ? (
         <Weather weatherData={data} />
       ) : (
         <div></div>
-      )} */}
+      )}
     </div>
   );
 };

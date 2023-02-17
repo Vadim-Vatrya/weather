@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import './components/styles.css';
 
+import Container from './components/Container';
 import Weather from './components/weather';
+import Main from './page/Main';
 
 const App = () => {
   const [lat, setLat] = useState([]);
@@ -35,13 +37,16 @@ const App = () => {
   // console.log(lat, long, data);
 
   return (
-    <div className="App">
-      {typeof data.main != 'undefined' ? (
-        <Weather weatherData={data} />
-      ) : (
-        <div></div>
-      )}
-    </div>
+    <>
+      <Container>
+        {typeof data.main != 'undefined' ? (
+          <Weather weatherData={data} />
+        ) : (
+          <div></div>
+        )}
+        <Main />
+      </Container>
+    </>
   );
 };
 

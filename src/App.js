@@ -20,7 +20,7 @@ const App = () => {
         setLong(position.coords.longitude);
       });
 
-      console.log(lat, long);
+      // console.log(lat, long);
 
       await fetch(
         `${API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${API_KEY}`,
@@ -28,7 +28,7 @@ const App = () => {
         .then(res => res.json())
         .then(result => {
           setData(result);
-          console.log(result);
+          // console.log(result);
         });
     };
     fetchData();
